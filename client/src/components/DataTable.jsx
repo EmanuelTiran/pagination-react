@@ -14,7 +14,6 @@ const DataTable = ({data}) => {
   const itemsPerPage = 10;
 
   const handleSort = (key) => {
-    console.log(key)
     const order = sortKey === key && sortOrder === 'asc' ? 'desc' : 'asc';
     setSortKey(key);
     setSortOrder(order);
