@@ -35,6 +35,11 @@ const DataTable = ({ url }) => {
     fetchBodyInfo();
   }, [search, sortKey, sortOrder, isActive, currentPage]);
 
+  useEffect(() => {
+    setCurrentPage(1)
+    setTotalLength(0)
+  }, [url, search, isActive]);
+
   const totalPages = Math.floor(totalLength / itemsPerPage);
   return (
     <>
