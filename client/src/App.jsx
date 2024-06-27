@@ -28,7 +28,7 @@ export const data = [
    { id: 24, name: 'Bob Brown', phone: '321-654-9870', age: 40, email: 'bob@example.com', status: 'inactive', money: 500, isActive: false },
    { id: 25, name: 'Charlie Davis', phone: '789-123-4567', age: 28, email: 'charlie@example.com', status: 'active', money: 3000, isActive: true },
    { id: 26, name: 'Diana Evans', phone: '654-321-0987', age: 22, email: 'diana@example.com', status: 'inactive', money: 750, isActive: false },
-   { id:27, name: 'Eve Ford', phone: '111-222-3333', age: 27, email: 'eve@example.com', status: 'active', money: 1800, isActive: true },
+   { id: 27, name: 'Eve Ford', phone: '111-222-3333', age: 27, email: 'eve@example.com', status: 'active', money: 1800, isActive: true },
    { id: 28, name: 'Frank Green', phone: '444-555-6666', age: 32, email: 'frank@example.com', status: 'inactive', money: 400, isActive: false },
    { id: 29, name: 'Grace Harris', phone: '777-888-9999', age: 45, email: 'grace@example.com', status: 'active', money: 2200, isActive: true },
    { id: 30, name: 'Hank Irving', phone: '222-333-4444', age: 33, email: 'hank@example.com', status: 'inactive', money: 600, isActive: false },
@@ -42,17 +42,20 @@ export const data = [
    { id: 38, name: 'Paul Quinn', phone: '777-888-9999', age: 39, email: 'paul@example.com', status: 'inactive', money: 700, isActive: false },
    { id: 39, name: 'Quincy Roberts', phone: '111-222-3333', age: 31, email: 'quincy@example.com', status: 'active', money: 1700, isActive: true },
    { id: 40, name: 'Rachel Smith', phone: '222-333-4444', age: 24, email: 'rachel@example.com', status: 'inactive', money: 1300, isActive: false },
- 
- ];
+
+];
 
 export default function App() {
+   const url = 'http://localhost:3355/users';
+
+
    return (
       <div>
          <header className="p-4 text-center">
             <h1 className="text-xl font-bold font-mono">Users Table</h1>
          </header>
          <main className="p-4">
-            <DataTable data={data} sortData={sortData} filterData={filterData}/>
+            <DataTable url={url} />
          </main>
       </div>
    )
