@@ -25,13 +25,13 @@ export default function App() {
             <div className="mt-4 text-center">
                <button
                   onClick={() => resolveDataType('users')}
-                  className={`m-1 px-4 py-2 bg-green-500 text-white rounded ${dataType === `users` && `border-slate-600 border-2`} `}
+                  className={`m-1 px-4 py-2 bg-slate-400 text-white rounded ${dataType === `users` && `border-slate-700 border-2`} `}
                >
                   Set to Users
                </button>
                <button
                   onClick={() => resolveDataType('cars')}
-                  className={`px-4 py-2 bg-green-500 text-white rounded ${dataType === `cars` && `border-slate-600 border-2`} `}
+                  className={`px-4 py-2 bg-slate-400 text-white rounded ${dataType === `cars` && `border-slate-700 border-2`} `}
                >
                   Set to cars
                </button>

@@ -1,38 +1,38 @@
 import { SaveOptions, Document } from "mongoose";
-import UserController from "../controller/UserController";
-import IUser from "../interfaces/IUser";
-import CreateNewUserRequest from "../dto/user/CreateNewUserRequest";
-import FilterUserRequest from "../dto/user/FilterUserRequest";
+import CarController from "../controller/CarController";
+import ICar from "../interfaces/ICar";
+import CreateNewCarRequest from "../dto/user/CreateNewCarRequest";
+import FilterUserRequest from "../dto/user/CreateNewCarRequest";
 
 class CarService {
-    private static controller: UserController = new UserController()
+    private static controller: CarController = new CarController()
 
-    static getAllUsers(filter: FilterUserRequest) {
+    static getAllCars(filter: FilterUserRequest) {
         return this.controller.read(filter);
     }
 
-    static async getSingleUser(email: string) {
+    static async getSingleCar(email: string) {
         return await this.controller.readOne({ email })
     }
 
-    static async createUser(body: CreateNewUserRequest) {
-        let oldUser = await this.getSingleUser(body.email)
-        if (oldUser) throw new Error("user is exist")
+    static async createCar(body: CreateNewCarRequest) {
+        let oldCar = await this.getSingleCar(body.licensePlate)
+        if (oldCar) throw new Error("Car is exist")
 
-        let nUser: IUser = {
-            fullName: body.fullName,
-            age: body.age,
-            email: body.email,
-            phone: body.phone,
-            permission: "user",
-            password: String(Math.random() * 100 * 100),
-        }
+        let nCar: ICar = {
+            model: body.model,
+            year: body.year,
+            color: body.color,
+            licensePlate: body.licensePlate,
+            owner: body.owner,
+            isActive: body.isActive,
+                   }
 
 
-        let newUser = await this.controller.create(nUser)
-        if (newUser.save) newUser.save()
+        let newCar = await this.controller.create(nCar)
+        if (newCar.save) newCar.save()
 
-        return newUser
+        return newCar
     }
 }
 
