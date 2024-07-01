@@ -4,7 +4,7 @@ import IUser from "../interfaces/IUser";
 import CreateNewUserRequest from "../dto/user/CreateNewUserRequest";
 import FilterUserRequest from "../dto/user/FilterUserRequest";
 
-class UserService {
+class CarService {
     private static controller: UserController = new UserController()
 
     static getAllUsers(filter: FilterUserRequest) {
@@ -36,4 +36,4 @@ class UserService {
     }
 }
 
-export default UserService
+export default CarService

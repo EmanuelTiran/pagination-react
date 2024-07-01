@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import Pagination from './Pagination';
 import axios from 'axios';
 
-const DataTable = ({ url }) => {
+const DataTable = ({ dataType }) => {
 
   const [data, setData] = useState('');
   const [search, setSearch] = useState('');
@@ -23,8 +23,9 @@ const DataTable = ({ url }) => {
 
   const fetchBodyInfo = async () => {
     try {
-      const response = await axios.post(url, { search, sortKey, sortOrder, isActive, currentPage });
-      setData(response.data.items);
+      const response = await axios.post(`http://localhost:3355/${dataType}`, { search, sortKey, sortOrder, isActive, currentPage });
+      response.data.items ? setData(response.data.items) : setData(response.data)
+      // setData(response.data.items);
       setTotalLength(response.data.count)
     } catch (err) {
       console.error(err);
@@ -33,12 +34,12 @@ const DataTable = ({ url }) => {
 
   useEffect(() => {
     fetchBodyInfo();
-  }, [search, sortKey, sortOrder, isActive, currentPage]);
+  }, [search, sortKey, sortOrder, isActive, currentPage,dataType]);
 
   useEffect(() => {
     setCurrentPage(1)
     setTotalLength(0)
-  }, [url, search, isActive]);
+  }, [dataType, search, isActive]);
 
   const totalPages = Math.floor(totalLength / itemsPerPage);
   return (
@@ -59,7 +60,7 @@ const DataTable = ({ url }) => {
           </select>
         </div>
 
-       {data.length ? <table className="min-w-full">
+        {data.length ? <table className="min-w-full">
           <thead>
             <tr>
               {data && Object.keys(data[0]).map((key, i) => (
@@ -88,18 +89,18 @@ const DataTable = ({ url }) => {
             ))}
           </tbody>
         </table> :
-         <div className='flex items-center justify-center  gap-6 flex-col hover:'>
-        <h1 className='flex items-center justify-center h-10 p-8 border text-5xl' >not found data</h1>
-        <button className='border text-xl' onClick={() => setSearch('')}>Refresh </button>
-      </div> 
-        
+          <div className='flex items-center justify-center  gap-6 flex-col hover:'>
+            <h1 className='flex items-center justify-center h-10 p-8 border text-5xl' >not found data</h1>
+            <button className='border text-xl' onClick={() => setSearch('')}>Refresh </button>
+          </div>
+
         }
 
         <Pagination currentPage={currentPage} totalPages={totalPages} totalLength={totalLength} itemsPerPage={data.length} setCurrentPage={setCurrentPage} />
 
-      </div> 
+      </div>
 
-     
+
 
     </>
   );

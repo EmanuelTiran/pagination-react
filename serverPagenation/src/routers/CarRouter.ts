@@ -4,6 +4,7 @@ import { Mapper } from '../helpers/Mapper'
 import CreateNewUserRequest from '../dto/user/CreateNewUserRequest'
 import { filterData, sortData } from '../helpers/functions'
 import FilterUserRequest from '../dto/user/FilterUserRequest'
+import CarModel from '../models/CarModel'
 
 
 const router = Router()
@@ -11,8 +12,9 @@ const router = Router()
 // CRUD : all users, signle user, create user, update user
 router.post('/', async (req: Request, res: Response) => {
     try {
-        let filter = Mapper<FilterUserRequest>(new FilterUserRequest(), req.body)    
-        res.send(await UserService.getAllUsers(filter))
+        // let filter = Mapper<FilterUserRequest>(new FilterUserRequest(), req.body)
+        let cars = await CarModel.find({})
+        res.send(cars )
     }
     catch (err) {
         res.status(400).send(err)
